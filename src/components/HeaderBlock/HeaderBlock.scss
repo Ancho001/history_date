@@ -1,0 +1,39 @@
+@use "../../app.scss" as *;
+
+.header {
+  @include pt-sans-bold;
+  font-size: 3vw;
+  color: var(--color-main);
+  position: absolute;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 20fr;
+  align-items: center;
+  top: 15.7vh;
+
+  @media screen and (max-width: 500px) {
+    display: block;
+    font-size: 6.25vw;
+    top: 10.5vh;
+  }
+
+  &--gradient {
+    height: 90%;
+    width: 0.25vw;
+    background: linear-gradient(
+      180deg,
+      var(--color-blue) 0%,
+      var(--color-pink) 100%
+    );
+
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+
+  &--text {
+    position: relative;
+    grid-column: 2;
+    line-height: 120%;
+  }
+}
