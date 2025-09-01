@@ -8,19 +8,58 @@ import "./YearText.scss";
 export const YearText = ({ activeItemTitle }: IYearsText) => {
   const yearsRef = useRef(null);
   useEffect(() => {
+    const itemFirst = document.querySelectorAll(".data-years-first");
+    gsap.from(itemFirst, {
+      textContent: activeItemTitle.yearStart,
+      duration: 0.5,
+      ease: "power1.in",
+      snap: { textContent: 1 },
+      stagger: 1,
+    });
+
+    const itemSecond = document.querySelectorAll(".data-years-second");
+    gsap.from(itemSecond, {
+      textContent: activeItemTitle.yearEnd,
+      duration: 0.5,
+      ease: "power1.in",
+      snap: { textContent: 1 },
+      stagger: 1,
+    });
+  }, []);
+
+  useEffect(() => {
     if (yearsRef.current) {
-      gsap.fromTo(
-        yearsRef.current,
-        { y: "25%", opacity: 0 },
-        { y: "0", opacity: 1, duration: 1 }
-      );
+      const itemFirst = yearsRef.current.querySelectorAll(".data-years-first");
+
+      gsap.from(itemFirst, {
+        textContent: activeItemTitle.yearStart - 10,
+        duration: 0.5,
+        ease: "power1.in",
+        snap: { textContent: 1 },
+        stagger: 1,
+      });
+
+      const itemSecond =
+        yearsRef.current.querySelectorAll(".data-years-second");
+
+      gsap.from(itemSecond, {
+        textContent: activeItemTitle.yearEnd - 10,
+        duration: 0.5,
+        ease: "power1.in",
+        snap: { textContent: 1 },
+        stagger: 1,
+      });
     }
   }, [activeItemTitle]);
 
   return (
     <div className="years" ref={yearsRef}>
-      <div className="years--first">{activeItemTitle.yearStart}</div>
-      <div className="years--second">{activeItemTitle.yearEnd}</div>
+      <div className="years--conteiner years--first">
+        <div className="data-years-first">{activeItemTitle.yearStart}</div>
+      </div>
+      <div className="years--second">
+        <div className="data-years-second">{activeItemTitle.yearEnd}</div>
+      </div>
     </div>
   );
 };

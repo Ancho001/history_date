@@ -52,18 +52,15 @@ export const CircleItem = ({
       onMouseLeave={onLeave}
       onClick={() => onChangeActiveItem(itemTitle)}
     >
-      {
-        <div
-          className="text"
-          data-circle-text-animate
-          style={{
-            opacity:
-              isHoveredItem || activeItemTitle.id === itemTitle.id ? 1 : 0,
-          }}
-        >
-          {itemTitle.id + 1}
-        </div>
-      }
+      <div
+        className="text"
+        data-circle-text-animate
+        style={{
+          opacity: isHoveredItem || activeItemTitle.id === itemTitle.id ? 1 : 0,
+        }}
+      >
+        {itemTitle.id + 1}
+      </div>
     </div>
   );
 };

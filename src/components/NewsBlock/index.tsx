@@ -12,16 +12,17 @@ import "swiper/css/pagination";
 import "./NewsBlock.scss";
 
 export const NewsBlock = ({ activeItemTitle, isDesktop }: INewsBlock) => {
+  const newsRef = useRef(null);
   const swiperRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   useEffect(() => {
-    if (swiperRef.current) {
+    if (newsRef.current) {
       gsap.fromTo(
-        swiperRef.current,
+        newsRef.current,
         { opacity: 0, y: "15%" },
-        { opacity: 1, y: 0, duration: 2 }
+        { opacity: 1, y: 0, duration: 1 }
       );
     }
   }, [activeItemTitle]);
@@ -39,8 +40,11 @@ export const NewsBlock = ({ activeItemTitle, isDesktop }: INewsBlock) => {
   };
 
   return (
-    <section className="news">
+    <section className="news" ref={newsRef}>
       <div className="news--slider">
+        {!isDesktop && (
+          <h2 className="news--slider-name">{activeItemTitle.name}</h2>
+        )}
         {isDesktop && (
           <div className="custom-navigation">
             <button
@@ -65,8 +69,8 @@ export const NewsBlock = ({ activeItemTitle, isDesktop }: INewsBlock) => {
           </div>
         )}
         <Swiper
-          ref={swiperRef}
           modules={[Navigation, Pagination]}
+          ref={swiperRef}
           pagination={
             isDesktop
               ? false
